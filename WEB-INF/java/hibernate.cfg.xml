@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+     <!--<property name="mappingDirectoryLocations">
+    <list>
+    <value>/</value>
+    </list>
+    </property>-->
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.password">pqIJg4fg</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/14_compweb_06b</property>
+  <property name="hibernate.connection.username">14_compweb_06</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+  <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
+  <mapping resource="Followers.hbm.xml"/>
+  <mapping resource="Users.hbm.xml"/>
+  <mapping resource="Forwards.hbm.xml"/>
+  <mapping resource="Hashtags.hbm.xml"/>
+  <mapping resource="MessageHashtags.hbm.xml"/>
+  <mapping resource="Messages.hbm.xml"/>
+ </session-factory>
+</hibernate-configuration>

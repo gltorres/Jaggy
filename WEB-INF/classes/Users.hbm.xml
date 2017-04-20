@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-may-2014 19:09:42 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class catalog="14_compweb_06b" name="Entities.UsersEntity" table="Users">
+  <id name="id" type="java.lang.Integer">
+   <column name="id"/>
+   <generator class="identity"/>
+  </id>
+  <property generated="never" lazy="false" name="name" type="string">
+   <column length="20" name="name" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="alias" type="string">
+   <column length="50" name="alias" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="password" type="string">
+   <column length="26" name="password" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="photo" type="string">
+   <column length="30" name="photo"/>
+  </property>
+ </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-may-2014 19:20:40 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class catalog="14_compweb_06b" name="Entities.HashtagsEntity" table="Hashtags">
+  <id name="id" type="java.lang.Integer">
+   <column name="id"/>
+   <generator class="identity"/>
+  </id>
+  <property generated="never" lazy="false" name="hashtag" type="string">
+   <column length="139" name="hashtag" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="authorId" type="int">
+   <column name="author_id" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="creationDate" type="timestamp">
+   <column length="19" name="creation_date" not-null="true"/>
+  </property>
+ </class>
+</hibernate-mapping>

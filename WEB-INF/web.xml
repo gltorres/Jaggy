@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+ 
+<web-app
+    xmlns="http://java.sun.com/xml/ns/javaee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    version="2.5">
+    <!-- General description of your web application -->
+
+    <display-name>Practica 5</display-name>
+    <description>Practica Servlets I de Laboratorio de Aplicaciones Telematicas
+    </description>
+  
+    <context-param>
+      <description>Location to store uploaded file</description> 
+      <param-name>image_path</param-name> 
+      <param-value>
+        ProfileImages/
+      </param-value>  
+    </context-param>
+ 
+    <!-- set the amount of seconds the conf file will be checked for reload
+    can be a valid integer (0 denotes check every time,
+    -1 denotes no reload check, default -1) -->
+    <init-param>
+      <param-name>confReloadCheckInterval</param-name>
+      <param-value>0</param-value>
+    </init-param>
+
+    <filter>
+      <filter-name>UrlRewriteFilter</filter-name>
+      <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+      <filter-name>UrlRewriteFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+      <dispatcher>REQUEST</dispatcher>
+      <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    <!-- Context initialization parameters that define shared
+         String constants used within your application, which
+         can be customized by the system administrator who is
+         installing your application.  The values actually
+         assigned to these parameters can be retrieved in a
+         servlet or JSP page by calling:
+
+             String value =
+               getServletContext().getInitParameter("name");
+
+         where "name" matches the <param-name> element of
+         one of these initialization parameters.
+
+         You can define any number of context initialization
+         parameters, including zero.
+    -->
+
+    <!--<context-param>
+      <param-name>webmaster</param-name>
+      <param-value>myaddress@mycompany.com</param-value>
+      <description>
+        The EMAIL address of the administrator to whom questions
+        and comments about this application should be addressed.
+      </description>
+    </context-param>
+	-->
+
+
+    <!-- Servlet definitions for the servlets that make up
+         your web application, including initialization
+         parameters.  With Tomcat, you can also send requests
+         to servlets not listed here with a request like this:
+
+           http://localhost:8080/{context-path}/servlet/{classname}
+
+         but this usage is not guaranteed to be portable.  It also
+         makes relative references to images and other resources
+         required by your servlet more complicated, so defining
+         all of your servlets (and defining a mapping to them with
+         a servlet-mapping element) is recommended.
+
+         Servlet initialization parameters can be retrieved in a
+         servlet or JSP page by calling:
+
+             String value =
+               getServletConfig().getInitParameter("name");
+
+         where "name" matches the <param-name> element of
+         one of these initialization parameters.
+
+         You can define any number of servlets, including zero.
+    -->
+
+    <servlet>
+      <servlet-name>Home</servlet-name>
+      <description></description>
+      <servlet-class>Home</servlet-class>
+    </servlet>
+
+    <servlet>
+      <servlet-name>Pruebas</servlet-name>
+      <description></description>
+      <servlet-class>Pruebas</servlet-class>
+    </servlet>
+	
+    <servlet>
+      <servlet-name>Session</servlet-name>
+      <description></description>
+      <servlet-class>Session</servlet-class>
+    </servlet>    
+	
+    <servlet>
+      <servlet-name>Publish</servlet-name>
+      <description></description>
+      <servlet-class>Publish</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>User</servlet-name>
+      <description></description>
+      <servlet-class>User</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>Forward</servlet-name>
+      <description></description>
+      <servlet-class>Forward</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>Reply</servlet-name>
+      <description></description>
+      <servlet-class>Reply</servlet-class>
+    </servlet>    
+	
+	<servlet>
+      <servlet-name>Hashtag</servlet-name>
+      <description></description>
+      <servlet-class>Hashtag</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>Upload</servlet-name>
+      <description></description>
+      <servlet-class>Upload</servlet-class>
+    </servlet>
+
+    <servlet>
+      <servlet-name>Conversation</servlet-name>
+      <description></description>
+      <servlet-class>Conversation</servlet-class>
+    </servlet>
+    
+      
+
+    <!-- Define mappings that are used by the servlet container to
+         translate a particular request URI (context-relative) to a
+         particular servlet.  The examples below correspond to the
+         servlet descriptions above.  Thus, a request URI like:
+
+           http://localhost:8080/{contextpath}/graph
+
+         will be mapped to the "graph" servlet, while a request like:
+
+           http://localhost:8080/{contextpath}/saveCustomer.do
+
+         will be mapped to the "controller" servlet.
+
+         You may define any number of servlet mappings, including zero.
+         It is also legal to define more than one mapping for the same
+         servlet, if you wish to.
+    -->
+
+    <servlet-mapping>
+      <servlet-name>Home</servlet-name>
+      <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+
+     <servlet-mapping>
+      <servlet-name>Pruebas</servlet-name>
+      <url-pattern>/pruebas</url-pattern>
+    </servlet-mapping>
+           
+	<servlet-mapping>
+      <servlet-name>Session</servlet-name>
+      <url-pattern>/session</url-pattern>
+    </servlet-mapping>	
+	
+	<servlet-mapping>
+      <servlet-name>Publish</servlet-name>
+      <url-pattern>/publish</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>User</servlet-name>
+      <url-pattern>/user</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>Forward</servlet-name>
+      <url-pattern>/forward</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>Reply</servlet-name>
+      <url-pattern>/reply</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+      <servlet-name>Hashtag</servlet-name>
+      <url-pattern>/hashtag</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>
+      <servlet-name>Upload</servlet-name>
+      <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+	
+     <servlet-mapping>
+      <servlet-name>Conversation</servlet-name>
+      <url-pattern>/conversation</url-pattern>
+    </servlet-mapping>
+	
+	
+</web-app>

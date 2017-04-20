@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-may-2014 19:20:40 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class catalog="14_compweb_06b" name="Entities.MessagesEntity" table="Messages">
+  <id name="id" type="java.lang.Integer">
+   <column name="id"/>
+   <generator class="identity"/>
+  </id>
+  <property generated="never" lazy="false" name="authorId" type="int">
+   <column name="author_id" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="text" type="string">
+   <column length="140" name="text" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="publishDate" type="timestamp">
+   <column length="19" name="publish_date" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="originalId" type="java.lang.Integer">
+   <column name="original_id"/>
+  </property>
+  <property generated="never" lazy="false" name="previousId" type="java.lang.Integer">
+   <column name="previous_id"/>
+  </property>
+ </class>
+</hibernate-mapping>

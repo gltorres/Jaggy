@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-may-2014 19:20:40 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class catalog="14_compweb_06b" name="Entities.MessageHashtagsEntity" table="MessageHashtags">
+  <composite-id class="Entities.MessageHashtagsId" mapped="false" name="id" unsaved-value="undefined">
+   <key-property name="messageId" type="int">
+    <column name="message_id"/>
+   </key-property>
+   <key-property name="hashtagId" type="int">
+    <column name="hashtag_id"/>
+   </key-property>
+  </composite-id>
+ </class>
+</hibernate-mapping>

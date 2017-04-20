@@ -1,0 +1,1359 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+
+<jsp:include page = "/WEB-INF/jspf/header.jspf"/>
+
+
+<HTML>
+<HEAD>
+</HEAD>
+<BODY>
+
+<script>
+$( document ).ready(function() {
+
+	$( ".replyButton" ).click(function(event) {
+		event.preventDefault();
+		$(this).clearQueue();
+		$(this).closest( ".messageView" ).find(".replyView").stop().toggle("fast"); 
+	});	
+	$( ".messageWrap" ).click(function(event) {
+		event.preventDefault();
+		$(this).clearQueue();
+		$(this).closest( ".messageView" ).find(".replyView").stop().toggle("fast"); 
+	});
+	
+});
+</script>
+
+<div class="pure-g">
+	<div class="pure-u-1-4">
+		<div class="userInfo" class="pure-g">
+			<p><span style="font-weight:bold"><c:out value="${userAlias}"/></span> @<c:out value="${userName}"/></p>
+			<img style="margin: 0px auto" class="profileImage" src="ProfileImages/<c:out value="${userPhoto}"/>.jpg"/>
+			<div class="userStats pure-g">
+				<div class="pure-u-1-3"><h2>Mensajes</h2><p><c:out value="${numMessages}"/></p></div>
+				<div class="pure-u-1-3"><h2>Siguiendo</h2><p><c:out value="${numFollowing}"/></p></div>
+				<div class="pure-u-1-3"><h2>Seguidores</h2><p><c:out value="${numFollowers}"/></p></div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="main-view" class="pure-u-1-2">
+		<div>
+			<form id="publishForm" method="POST" class="pure-form" action="publish">
+				<textarea rows="3" name="message" placeholder="CuÃÂ©ntanos mÃÂ¡s..."></textarea>
+				<button type="submit" class="button-green pure-button">Publicar</button>
+			</form>
+		</div>
+		<div id="timeline">
+			 <c:forEach items="${timelineMsgs}" var="msg">
+			 <c:set var="msg" scope="request" value="${msg}"/>
+			  	<jsp:include page="/WEB-INF/jspf/message.jsp"/>
+			 </c:forEach>
+		</div>
+	</div>
+	<div class = "pure-u-1-4" >
+
+	</div>
+</div>
+</BODY>
+</HTML>
+
+<jsp:include page = "/WEB-INF/jspf/footer.jspf"/><%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:include page = "/WEB-INF/jspf/header_default.jspf"/>
+
+<script>
+$( document ).ready(function() {
+	$("#loginForm").submit(function() {
+		$("#response").fadeOut("fast");
+		var url = "session";
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: $("#loginForm").serialize(),
+			dataType: "json",
+			success: function(response) {
+				if (response.redirect) 
+				{
+					window.location.href = response.redirect;
+				}
+				if (response.error)
+				{
+					$("#response").html(response.error);
+					$("#response").fadeIn("fast");
+				}
+			}
+		});
+		return false;
+	});
+});
+</script>
+
+<div style="margin: 0px auto;max-width: 600px;" class="pure-g">
+	<div class="pure-u-1-2">
+		<h2>Â¡Bienvenido a Jaggy!</h2>
+		<p style="margin-right:2em">Insertar una frase hypster aquÃ­Â­.</p>
+	</div>
+	<div class="pure-u-1-2">
+		<form id="loginForm" class="pure-form pure-form-aligned" method="POST">
+			<fieldset class="pure-group">
+				<input name="username" class="pure-input-1" type="text" placeholder="Nombre de usuario">
+				<input name="password" class="pure-input-1" type="password" placeholder="ContraseÃ±a">
+			</fieldset>
+
+			<button type="submit" class="button-secondary pure-input-1 pure-button">Entrar</button>
+		</form>
+		<div style="display:none" class="button-error" id="response"></div>
+	</div>
+</div>
+
+<jsp:include page = "/WEB-INF/jspf/footer.jspf"/>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+
+<jsp:include page = "/WEB-INF/jspf/header.jspf"/>
+
+
+<HTML>
+<HEAD>
+</HEAD>
+<BODY>
+
+<script>
+$( document ).ready(function() {
+
+	$( ".replyButton" ).click(function(event) {
+		event.preventDefault();
+		$(this).clearQueue();
+		$(this).closest( ".messageView" ).find(".replyView").stop().toggle("fast"); 
+	});	
+	$( ".messageWrap" ).click(function(event) {
+		event.preventDefault();
+		$(this).clearQueue();
+		$(this).closest( ".messageView" ).find(".replyView").stop().toggle("fast"); 
+	});
+	
+});
+</script>
+
+<div class="pure-g">
+	<div class="pure-u-1-4">
+
+	</div>
+	
+	<div id="main-view" class="pure-u-1-2">
+			<div class="userInfo" class="pure-g">
+			<p><span style="font-weight:bold"><c:out value="${userAlias}"/></span> @<c:out value="${userName}"/></p>
+			<img style="margin: 0px auto" class="profileImage" src="ProfileImages/<c:out value="${userPhoto}"/>.jpg"/>
+			<div class="userStats pure-g">
+				<div class="pure-u-1-3"><h2>Mensajes</h2><p><c:out value="${numMessages}"/></p></div>
+				<div class="pure-u-1-3"><h2>Siguiendo</h2><p><c:out value="${numFollowing}"/></p></div>
+				<div class="pure-u-1-3"><h2>Seguidores</h2><p><c:out value="${numFollowers}"/></p></div>
+			</div>
+		</div>
+		<div id="timeline">
+			 <c:forEach items="${profileMsgs}" var="msg">
+			 <c:set var="msg" scope="request" value="${msg}"/>
+			  	<jsp:include page="/WEB-INF/jspf/message.jsp"/>
+			 </c:forEach>
+		</div>
+	</div>
+	<div class = "pure-u-1-4" >
+
+	</div>
+</div>
+</BODY>
+</HTML>
+
+<jsp:include page = "/WEB-INF/jspf/footer.jspf"/>import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.Date;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import java.sql.*;
+import java.util.ArrayList;
+import DataBeans.*;
+
+
+/**
+ * Servlet que muestra una lista de los libros
+ * disponibles en la base de datos.
+ *
+ */
+public class Home extends HttpServlet
+{
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws IOException, ServletException
+    {
+        // establece ContentType y sistema de codificaciÃ³n de caracteres
+        response.setContentType("text/html; charset=UTF-8");
+        
+        UserBean user = (UserBean)request.getSession().getAttribute("UserData");
+        String userName;
+        RequestDispatcher rd ;
+        
+	if (user == null)
+	{
+		rd = request.getRequestDispatcher("login.jsp");
+		rd.forward(request, response);
+	}
+	else
+	{
+		rd = request.getRequestDispatcher("home.jsp");
+		userName = (String)user.getName();
+		
+		request.setAttribute("userName", userName);
+		request.setAttribute("userPhoto", (String)user.getPhoto());
+		request.setAttribute("userAlias", user.getAlias());
+		
+		DBManager db = null;
+		try
+		{
+			db = new DBManager();
+
+			int numMessages = db.numMessages(user.getId());
+			int numFollowing = db.numFollowing(user.getId());
+			int numFollowers = db.numFollowers(user.getId());
+			
+			request.setAttribute("numMessages", numMessages);
+			request.setAttribute("numFollowing", numFollowing);
+			request.setAttribute("numFollowers", numFollowers);
+
+			ArrayList<MessageBean> timelineMsgs = db.getTimelineMsgs(user.getId());
+			
+			request.setAttribute("timelineMsgs", timelineMsgs);
+			for (MessageBean msg : timelineMsgs) 
+			{ 
+				System.out.println("[User]: " + msg.getUser().getName());
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			db.close();
+		}
+		
+		rd.forward(request,response);
+	}
+        // obtiene un PrintWriter para escribir la respuesta
+        PrintWriter out = response.getWriter();
+    }
+}import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.Date;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import java.sql.*;
+
+/**
+ * Servlet que muestra una lista de los libros
+ * disponibles en la base de datos.
+ *
+ */
+public class Buscar extends HttpServlet
+{
+	
+	// Coge lo introducido en el campo buscar y hace una peticion SQL a la base de datos.
+	
+}import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.Date;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import java.sql.*;
+import java.util.ArrayList;
+import DataBeans.*;
+
+
+public class User extends HttpServlet
+{
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws IOException, ServletException
+    {
+        // establece ContentType y sistema de codificaciÃ³n de caracteres
+        response.setContentType("text/html; charset=UTF-8");
+        
+        UserBean userLogIn = (UserBean)request.getSession().getAttribute("UserData");
+        String userLogInName;
+        RequestDispatcher rd ;
+        
+	if (userLogIn == null)
+	{
+		rd = request.getRequestDispatcher("login.jsp");
+		rd.forward(request, response);
+	}
+	else
+	{
+		rd = request.getRequestDispatcher("profile.jsp");
+		userLogInName = (String)userLogIn.getName();
+		
+		request.setAttribute("userLogInName", userLogInName);
+		request.setAttribute("userLogInPhoto", (String)userLogIn.getPhoto());
+		request.setAttribute("userLogInAlias", userLogIn.getAlias());
+		
+		DBManager db = null;
+		try
+		{
+			db = new DBManager();
+
+			UserBean user = db.getUser(request.getParameter("name"));
+			
+			request.setAttribute("userName",(String)user.getName());
+			request.setAttribute("userPhoto",(String)user.getPhoto());
+			request.setAttribute("userAlias",user.getAlias());
+			
+			int userId = user.getId();
+			
+			int numMessages = db.numMessages(userId);
+			int numFollowing = db.numFollowing(userId);
+			int numFollowers = db.numFollowers(userId);
+			
+			request.setAttribute("numMessages", numMessages);
+			request.setAttribute("numFollowing", numFollowing);
+			request.setAttribute("numFollowers", numFollowers);
+			
+			ArrayList<MessageBean> profileMsgs = db.getProfileMsgs(userId);
+			
+			request.setAttribute("profileMsgs", profileMsgs);
+			for (MessageBean msg : profileMsgs) 
+			{ 
+				System.out.println("[User]: " + msg.getUser().getName());
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			db.close();
+		}
+		
+		rd.forward(request,response);
+	}
+        // obtiene un PrintWriter para escribir la respuesta
+        PrintWriter out = response.getWriter();
+    }
+}import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import org.json.simple.JSONObject;
+import DataBeans.*;
+
+/**
+ * Servlet que recibe las credenciales de login de un usuario mediante ajax.
+ * - Si todo va bien inicializa los datos de sesiÃ³n.
+ * - En caso de error devolverÃ¡ una respuesta ajax para mostrar al usuario.
+ */
+public class Session extends HttpServlet {
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	throws IOException, ServletException
+	{
+		//jaggy/session?action=logout
+		String action = request.getParameter("action");
+		if (action != null)
+		{
+			if(action.equals("logout"))
+			{
+				request.getSession().invalidate();
+			}
+		}
+		// Este servlet solo soporta peticiones POST.
+		response.sendRedirect("home");
+	}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+	throws IOException, ServletException
+	{
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+			
+		JSONObject jsonResponse = new JSONObject();
+		
+		
+		UserBean user;
+			
+		DBManager db = null;
+		try
+		{
+			db = new DBManager();
+			user = db.getUser(username);
+		       /* user = new UserBean();
+                user.setId(1);
+                user.setName(("Paco"));
+                user.setAlias(("alias"));
+                user.setPassword(("1234"));*/
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			user = null;
+		}
+		finally
+		{
+			db.close();
+		}
+		
+		
+		if (user == null)
+			jsonResponse.put("error", "Usuario incorrecto");
+		else
+		{
+				// Esta comprobaciÃ³n deberÃ­a hacerla el DBManager para no exponer las contraseÃ±as.
+				if (user.getPassword().equals(password))
+				{
+					// Si la contraseÃ±a es correcta establecemos los datos de sesiÃ³n
+					request.getSession().setAttribute("UserData", user);
+					// Y redirigimos al usuario a la pÃ¡gina principal.
+					//response.sendRedirect("home");
+					jsonResponse.put("redirect", "home");
+				}
+				else
+				{
+					jsonResponse.put("error", "ContraseÃ±a incorrecta.");
+				}
+		}
+			
+		response.setContentType("application/json");
+		response.setHeader("Cache-Control", "nocache");
+		response.setCharacterEncoding("utf-8");
+			
+		response.getWriter().println(jsonResponse);
+	}
+}import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.Date;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import java.sql.*;
+import DataBeans.*;
+
+/**
+ * Servlet que muestra una lista de los libros
+ * disponibles en la base de datos.
+ *
+ */
+public class Publish extends HttpServlet
+{
+		
+		//Crea un nuevo mensaje y le da el id de la conversaciÃ³n a la que pertenece.
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+	throws IOException, ServletException
+	{
+		// establece ContentType y sistema de codificaciÃÂ³n de caracteres
+		response.setContentType("text/html; charset=UTF-8");
+		
+		UserBean user = (UserBean)request.getSession().getAttribute("UserData");
+		String userName;
+		RequestDispatcher rd ;
+		
+		if (user == null)
+		{
+			System.out.println("ERROR INVALID USER");
+			response.sendRedirect("home");
+		}
+
+		String text  = request.getParameter("message");
+		String msgType  = request.getParameter("type");
+		
+		if ((text != null) && (text.length() <= 141))
+		{
+			MessageBean msg = new MessageBean();
+			msg.setText(text);
+			msg.setUser(user);
+			
+			/*java.util.Date today = new java.util.Date();
+			java.sql.Date sqlToday = new java.sql.Date(today.getTime());
+			
+			msg.setPublish_date(sqlToday);*/
+			
+			DBManager db = null;
+			try
+			{
+				db = new DBManager();
+				db.postMessage(msg);
+				System.out.println("SUCCESS: " + msg.toString());
+			}
+			catch(Exception e)
+			{
+			
+			}
+			finally
+			{
+				db.close();
+			}
+			
+			response.sendRedirect("home");
+		}
+	}
+	
+}import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import java.sql.*;
+import java.util.ArrayList;
+import DataBeans.*;
+
+public class DBManager
+{
+    private Connection conn;
+
+    public DBManager() throws SQLException, NamingException
+    {
+        open();
+    }
+
+    public UserBean getUser(int id)
+    {
+        return this.getUser("id", String.valueOf(id), false);
+    }
+
+    public UserBean getUser(String name)
+    {
+        return this.getUser("name", name, false);
+    }
+
+    private UserBean getUser(String row, String column, boolean keepConnectionOpen)
+    {
+        UserBean user = null;
+
+        try
+        {
+            String query = "SELECT * FROM Users WHERE " + row + " = ?";
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+
+            if (row.equals("name"))
+                stmt.setString(1, column);
+            else
+                stmt.setInt(1, Integer.parseInt(column));
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next())
+            {
+                user = new UserBean();
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setAlias(rs.getString("alias"));
+                user.setPassword(rs.getString("password"));
+                user.setPhoto(rs.getString("photo") == null ? "default" : rs.getString("photo"));
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            user = null;
+        }
+        finally
+        {
+			//if (!keepConnectionOpen)
+				//this.close();
+        }
+
+        return user;
+    }
+
+    public ArrayList<MessageBean> getTimelineMsgs(int userId)
+    {
+        ArrayList<MessageBean> msgs = new ArrayList<MessageBean>();
+
+        // Aca va la chicha
+        try
+        {
+            String query = "(SELECT m.* " + 
+                           "FROM Messages AS m " +
+                           "INNER JOIN Users AS u ON m.author_id = u.id " +
+                           "WHERE u.id = ?) " +
+                           "UNION " +
+                           "(SELECT m.* " +
+                           "FROM Messages AS m " +
+                           "INNER JOIN Followers AS f ON m.author_id = f.user_id " +
+                           "WHERE f.followed_id = ?) " +
+                           "ORDER BY publish_date DESC;";
+
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+
+            stmt.setInt(1, userId);
+            stmt.setInt(2, userId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next())
+            {
+                MessageBean msg = new MessageBean();
+				System.out.println("[DBMgr: MsgAuthorID]: " + rs.getInt("author_id"));
+
+                UserBean usr = getUser("id", String.valueOf(rs.getInt("author_id")), true);
+                
+				if(usr != null)
+					System.out.println("[DBMgr: User]: " + usr.getName());
+				
+                msg.setId(rs.getInt("id"));
+                msg.setText(rs.getString("text"));
+                msg.setPublish_date(rs.getTimestamp("publish_date"));
+                msg.setOriginal_id(rs.getInt("original_id"));
+                msg.setPrevious_id(rs.getInt("previous_id"));
+                msg.setUser(usr);
+
+                msgs.add(msg);
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            //msgs = null;
+        }
+        finally
+        {
+            //this.close();
+        }
+
+        return msgs;
+    }
+  
+
+    public ArrayList<MessageBean> getProfileMsgs(int userId)
+    {
+        ArrayList<MessageBean> msgs = new ArrayList<MessageBean>();
+
+        // Aca va la chicha
+        try
+        {
+            String query = "(SELECT m.* " + 
+                           "FROM Messages AS m " +
+                           "INNER JOIN Users AS u ON m.author_id = u.id " +
+                           "WHERE u.id = ?) ";
+
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+
+            stmt.setInt(1, userId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next())
+            {
+                MessageBean msg = new MessageBean();
+				System.out.println("[DBMgr: MsgAuthorID]: " + rs.getInt("author_id"));
+
+                UserBean usr = getUser("id", String.valueOf(rs.getInt("author_id")), true);
+                
+				if(usr != null)
+					System.out.println("[DBMgr: User]: " + usr.getName());
+				
+                msg.setId(rs.getInt("id"));
+                msg.setText(rs.getString("text"));
+                msg.setPublish_date(rs.getTimestamp("publish_date"));
+                msg.setOriginal_id(rs.getInt("original_id"));
+                msg.setPrevious_id(rs.getInt("previous_id"));
+                msg.setUser(usr);
+
+                msgs.add(msg);
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            //msgs = null;
+        }
+        finally
+        {
+            //this.close();
+        }
+
+        return msgs;
+    }
+    
+    public void forwardMessage(int forwardUserId, int msgId)
+    {
+        try
+        {
+	    String query = "INSERT INTO Forwards (forwarder_id, message_id, forward_date)" +
+			   "VALUES (?, ?, NOW());";
+	    
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+            
+            stmt.setInt(1, forwardUserId);
+            stmt.setInt(2, msgId);
+            
+            stmt.executeUpdate();
+        
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+            //msgs = null;
+        }
+         finally
+        {
+            //this.close();
+        }
+    }
+    
+    public void postMessage(MessageBean msg)
+    {
+        if (msg == null || msg.getUser() == null)
+            return;
+        try
+        {
+            String query = "INSERT INTO Messages (author_id, text, publish_date, original_id, previous_id)" +
+                           "VALUES (?, ?, NOW(), ?, ?);"; 
+
+
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+
+            stmt.setInt(1, msg.getUser().getId());
+            stmt.setString(2, msg.getText());
+            //stmt.setTimestamp(3, msg.getPublish_date());
+            stmt.setInt(3, msg.getOriginal_id());
+            stmt.setInt(4, msg.getPrevious_id());
+
+            stmt.executeUpdate(); //capturar numero de row... pa' que?
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            //msgs = null;
+        }
+        finally
+        {
+            //this.close();
+        }
+    }
+
+    public ArrayList<MessageBean> getConversation(int msgId)
+    {
+        ArrayList<MessageBean> msgs = new ArrayList<MessageBean>();
+
+        // Aca va la chicha
+        try
+        {
+            String query = "(SELECT * FROM Messages as m WHERE m.id = ?) " + 
+                           "UNION " +
+                           "(SELECT * FROM Messages as m WHERE m.original_id = ?) " +
+                           "ORDER BY m.publish_date DESC;";
+
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+
+            stmt.setInt(1, msgId);
+            stmt.setInt(2, msgId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next())
+            {
+                MessageBean msg = new MessageBean();
+				System.out.println("[DBMgr: MsgAuthorID]: " + rs.getInt("author_id"));
+
+                UserBean usr = getUser("id", String.valueOf(rs.getInt("author_id")), true);
+                
+				if(usr != null)
+					System.out.println("[DBMgr: User]: " + usr.getName());
+				
+                msg.setId(rs.getInt("id"));
+                msg.setText(rs.getString("text"));
+                msg.setPublish_date(rs.getTimestamp("publish_date"));
+                msg.setOriginal_id(rs.getInt("original_id"));
+                msg.setPrevious_id(rs.getInt("previous_id"));
+                msg.setUser(usr);
+
+                msgs.add(msg);
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            //msgs = null;
+        }
+        finally
+        {
+            //this.close();
+        }
+
+        return msgs;
+
+    }
+
+    public int numFollowers(int userId)
+    {
+        int num = 0;
+
+        try
+        {
+            String query = "SELECT COUNT(*) as num FROM Followers as f WHERE f.user_id = ?;";
+
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+
+            stmt.setInt(1, userId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next())
+            {
+				num = rs.getInt("num");
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            //msgs = null;
+        }
+        finally
+        {
+            //this.close();
+        }
+
+        return num;
+    }
+
+    public int numFollowing(int userId)
+    {
+        int num = 0;
+
+        try
+        {
+            String query = "SELECT COUNT(*) as num FROM Followers as f WHERE f.followed_id = ?;";
+
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+
+            stmt.setInt(1, userId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next())
+            {
+				num = rs.getInt("num");
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            //msgs = null;
+        }
+        finally
+        {
+            ////this.close();
+        }
+
+        return num;
+
+    }
+
+    public int numMessages(int userId)
+    {
+        int num = 0;
+
+        try
+        {
+            String query = "SELECT COUNT(*) as num FROM Messages as m WHERE m.author_id = ?;";
+
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+
+            stmt.setInt(1, userId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next())
+            {
+				num = rs.getInt("num");
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            //msgs = null;
+        }
+        finally
+        {
+            //this.close();
+        }
+
+        return num;
+
+    }
+
+    public ArrayList<MessageBean> getMessages(int userId)
+    {
+        ArrayList<MessageBean> msgs = new ArrayList<MessageBean>();
+
+        try
+        {
+            String query = "SELECT * FROM Messages as m WHERE m.author_id = ?;"; 
+
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+
+            stmt.setInt(1, userId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next())
+            {
+                MessageBean msg = new MessageBean();
+				System.out.println("[DBMgr: MsgAuthorID]: " + rs.getInt("author_id"));
+
+                UserBean usr = getUser("id", String.valueOf(rs.getInt("author_id")), true);
+                
+				if(usr != null)
+					System.out.println("[DBMgr: User]: " + usr.getName());
+				
+                msg.setId(rs.getInt("id"));
+                msg.setText(rs.getString("text"));
+                msg.setPublish_date(rs.getTimestamp("publish_date"));
+                msg.setOriginal_id(rs.getInt("original_id"));
+                msg.setPrevious_id(rs.getInt("previous_id"));
+                msg.setUser(usr);
+
+                msgs.add(msg);
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            //msgs = null;
+        }
+        finally
+        {
+            //this.close();
+        }
+
+        return msgs;
+    }
+
+    public void saveHashtag(HashtagBean hashtag)
+    {
+        if (hashtag == null)
+            return;
+        try
+        {
+            String query = "INSERT INTO Hashtags (hashtag, author_id, creation_date)" +
+                           "VALUES (?, ?, NOW());"; 
+
+
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+
+            stmt.setString(1, hashtag.getHashtag());
+            stmt.setInt(2, hashtag.getAuthor_id());
+
+            stmt.executeUpdate(); //capturar numero de row... pa' que?
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            this.close();
+        }
+    }
+
+    private void open() throws SQLException, NamingException
+    {
+        Context initCtx = new InitialContext();
+        Context envCtx = (Context) initCtx.lookup("java:comp/env");
+        DataSource ds = (DataSource) envCtx.lookup("jdbc/Jaggy");
+        this.conn = ds.getConnection();
+    }
+
+    public void close()
+    {
+        try
+        {
+            if (!this.conn.isClosed())
+                this.conn.close();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+}
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.Date;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import java.sql.*;
+import DataBeans.*;
+
+/**
+ * Servlet que muestra una lista de los libros
+ * disponibles en la base de datos.
+ *
+ */
+public class Reply extends HttpServlet
+{
+
+	//Crea un nuevo mensaje y le da el id de la conversacion a la que pertenece.
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+	throws IOException, ServletException
+	{
+		// establece ContentType y sistema de codificacion de caracteres
+		response.setContentType("text/html; charset=UTF-8");
+		
+		UserBean user = (UserBean)request.getSession().getAttribute("UserData");
+		String userName;
+		RequestDispatcher rd ;
+		
+		if (user == null)
+		{
+			System.out.println("ERROR INVALID USER");
+			response.sendRedirect("home");
+		}
+
+		String text  = request.getParameter("message");
+		String msgType  = request.getParameter("type");
+		
+		if ((text != null) && (text.length() <= 141))
+		{
+			MessageBean msg = new MessageBean();
+			int prevMsgId = Integer.parseInt(request.getParameter("prevMsgId"));
+			int origMsgId =  Integer.parseInt(request.getParameter("origMsgId"));
+			if(origMsgId == 0)
+			{
+				origMsgId = prevMsgId;
+			}
+			
+			msg.setText(text);
+			msg.setUser(user);
+			msg.setOriginal_id(origMsgId);
+			msg.setPrevious_id(prevMsgId);
+			
+			/*java.util.Date today = new java.util.Date();
+			java.sql.Date sqlToday = new java.sql.Date(today.getTime());
+			
+			msg.setPublish_date(sqlToday);*/
+			
+			DBManager db = null;
+			try
+			{
+				db = new DBManager();
+				db.postMessage(msg);
+				System.out.println("SUCCESS: " + msg.toString());
+			}
+			catch(Exception e)
+			{
+			
+			}
+			finally
+			{
+				db.close();
+			}
+			
+			response.sendRedirect("home");
+		}
+	}
+	
+}
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.Date;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import java.sql.*;
+import DataBeans.*;
+
+/**
+ * Servlet que muestra una lista de los libros
+ * disponibles en la base de datos.
+ *
+ */
+public class Forward extends HttpServlet
+{
+	
+	//Incluye el mensaje reenviado en tu perfil, mostrando los datos originales del mensaje.
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+	throws IOException, ServletException
+	{
+		// establece ContentType y sistema de codificaciÃÂ³n de caracteres
+		response.setContentType("text/html; charset=UTF-8");
+		
+		UserBean user = (UserBean)request.getSession().getAttribute("UserData");
+		String userName;
+		RequestDispatcher rd;
+		
+		if (user == null)
+		{
+			System.out.println("ERROR INVALID USER");
+			//response.sendRedirect("home");
+		}
+		int forwarderId,msgId;
+		
+		forwarderId = (int)user.getId();
+		msgId = (int)request.getAttribute("fwdMsgId");
+		
+		DBManager db = null;
+		try
+		{
+			db = new DBManager();
+			
+			db.forwardMessage(forwarderId,msgId);
+			System.out.println("SUCCESS: Forwarded Message:" + msgId + "by user:" + user.getName());
+		}
+		catch (Exception e)
+		{
+		
+		}
+		finally
+		{
+			db.close();
+		}
+	}
+	
+}package DataBeans;
+
+import java.sql.Date;
+
+
+public class HashtagBean
+{
+    private String hashtag;
+    private int author_id;
+    private Date creation_date;
+
+    public HashtagBean()
+    {
+    }
+
+    public String getHashtag()
+    {
+        return this.hashtag;
+    }
+
+    public int getAuthor_id()
+    {
+        return this.author_id;
+    }
+
+    public Date getCreation_date()
+    {
+        return this.creation_date;
+    }
+
+    public void setHashtag(String hashtag)
+    {
+        this.hashtag = hashtag;
+    }
+
+    public void setAuthor_id(int id)
+    {
+       this.author_id = id;
+    }
+
+    public void setCreation_date(Date date)
+    {
+        this.creation_date = date;
+    }
+}
+package DataBeans;
+
+import java.sql.Timestamp;
+/**
+ * Bean que representa los mensajes de la base de datos
+ *
+ */
+
+public class MessageBean
+{
+    private int id;
+    private UserBean user;
+    private String text;
+    private Timestamp publish_date;
+    private int original_id, previous_id;
+
+    
+	public MessageBean(){}
+
+	public MessageBean(String text, Timestamp publish_date,int original_id, int previous_id)
+	{
+		this.text = text;
+		this.publish_date = publish_date;
+		this.original_id = original_id;
+		this.previous_id = previous_id;
+	}
+
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public UserBean getUser() {
+		return user;
+	}
+	public void setUser(UserBean user) {
+		this.user = user;
+	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
+	public Timestamp getPublish_date() {
+		return publish_date;
+	}
+	public void setPublish_date(Timestamp publish_date) {
+		this.publish_date = publish_date;
+	}
+	public int getOriginal_id() {
+		return original_id;
+	}
+	public void setOriginal_id(int original_id) {
+		this.original_id = original_id;
+	}
+	public int getPrevious_id() {
+		return previous_id;
+	}
+	public void setPrevious_id(int previous_id) {
+		this.previous_id = previous_id;
+	}
+	
+	public String toString()
+	{
+		String result = "[MESSAGE]\n";
+		result += "ID: " + this.id + "\n";
+		result += "TEXT: " + this.text + "\n";
+		result += "DATE: " + this.publish_date + "\n";
+		
+		return result;
+	}
+}
+package DataBeans;
+
+/**
+ * Bean que representa los usuarios de la base de datos
+ *
+ */
+public class UserBean
+{
+    private int id;
+    private String name;
+    private String alias;
+    private String password; //RLY??
+    private String photo; 
+
+    public UserBean()
+    {
+
+    }
+
+    public UserBean(int id, String name, String alias, String password)
+    {
+        this.id = id;
+        this.name = name;
+        this.alias = alias;
+        this.password = password;
+        this.photo = photo;
+    }
+
+    public int getId()
+    {
+        return this.id;
+    }
+
+    public String getName()
+    {
+        return this.name;
+    }
+
+    public String getAlias()
+    {
+        return this.alias;
+    }
+
+    public String getPassword()
+    {
+        return this.password;
+    }    
+	
+	public String getPhoto()
+    {
+        return this.photo;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public void setAlias(String alias)
+    {
+        this.alias = alias;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }    
+	
+	public void setPhoto(String photo)
+    {
+        this.photo = photo;
+    }
+}
+ï»¿
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+
+<div class="messageView">
+		<div class="pure-g messageWrap">
+			<div class="pure-u-1-8" style="margin:9px 0px 0px 0px;">
+				<img src="ProfileImages/<c:out value="${msg.user.photo}"/>.jpg">
+			</div>
+			<div style="margin-top:4px;" class="pure-u-7-8">
+			<span class="username">
+				<a href="user?name=<c:out value="${msg.user.name}"/>">
+					<c:out value="${msg.user.alias}"/>
+				</a>
+			</span>
+			<span style="font-style:italic"> 
+			@<c:out value="${msg.user.name}"/>
+			</span>
+			<p style="line-height: 17px; margin:auto; font-size: 14px; color:black"><c:out value="${msg.text}"/></p>
+			<div style="text-align: right; width: 100%;">
+				<ul class="messageActions">
+					<li><a class="replyButton" href="">Re-JAGG</a></li>
+					<li><a href="">Responder</a></li>
+				</ul>
+			</div>
+			</div>
+		</div>
+		<div  style="display:none" class="replyView">
+			<form id="publishForm" method="POST" class="pure-form" action="reply">
+				<textarea rows="3" name="message" placeholder="Responder a @<c:out value="${msg.user.name}"/>"></textarea>
+				<input type="hidden" name="prevMsgId" value="<c:out value="${msg.id}"/>"/>
+				<input type="hidden" name="origMsgId" value="<c:out value="${msg.original_id}"/>"/>
+				<button type="submit">Responder</button>
+			</form>
+		</div>
+</div>

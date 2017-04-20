@@ -1,0 +1,217 @@
+
+
+body {
+	color: #777;
+	line-height: 1.6;
+}
+
+.header {
+	z-index: 1;
+	height: 46px;
+	border-bottom: 2px solid rgb(219, 219, 219)
+}
+
+.header h1 {
+	color: whitesmoke;
+	font-size: 38;
+	font-family: verdana;
+	font-weight: bold;
+	margin: 0px auto;
+	width: 250px;
+}
+
+/*.main-nav {
+	color: whitesmoke;
+}
+.main-nav li {
+
+	float: left;
+}
+.main-nav li a, .main-nav li a:visited {
+	padding: 10px;
+	text-decoration: none;
+	color: whitesmoke;
+	display:block;
+}*/
+
+.main-nav li a:hover {
+	color: whitesmoke;
+	background: #5DAD37;
+}
+
+.main-content {
+	max-width: 960px;
+	margin: 25px;
+}
+
+.content-wrapper {
+	position: relative;
+	top: 47px;
+	max-width: 1024px;
+	margin: 0px auto;
+	width: 100%;
+	z-index: 0;
+	background: white;
+}
+
+.button-secondary {
+	background: rgb(66, 184, 221);
+	color: #fff;
+}
+
+.button-error {
+	background: #FF8873;
+	color: #8c3a2b;
+	border-radius: 2px;
+	box-shadow: 0 0 0 1px rgba(0,0,0,.15) inset,0 0 6px rgba(0,0,0,.2) inset;
+	padding: .5em 1em;
+	text-align: center;
+}
+
+
+.header a{
+	color:whitesmoke;
+}
+
+.button-green {
+	background: rgb(28, 184, 65); /* this is a green */
+	color: whitesmoke;
+	float:right;
+	position:relative;
+	right:0px;
+	margin-top:5px
+}
+
+.invisible-button{
+	background:white;
+}
+
+#searchBar {
+	float: right;
+	margin: auto 0px;
+	position: relative;
+	top: 5px;
+}
+
+#publishForm textarea {
+	width: 100%;
+}
+
+#publishForm button {
+	margin: 5px 0px 0px 0px;
+}
+
+.profileImage {
+	margin: 0px auto;
+	height: 128px;
+	width: 128px;
+}
+
+#main-view {
+  padding: 30px 20px 0px 20px;
+}
+
+#logout {
+	float: right;
+	top: 1px;
+	position: absolute;
+	right:10px;
+	
+}
+
+a:hover#logout {
+	color: whitesmoke;
+	background: #5DAD37;
+}
+
+#timeline {
+	padding-top: 20px;
+	clear: both;
+}
+
+/* Estilo para mensajes */
+
+.messageView {
+	border-bottom: 1px solid rgb(209, 209, 209);
+	padding: 10px;
+	cursor: pointer; 
+	cursor: hand;
+}
+
+.messageView p {
+	word-wrap:break-word;
+}
+.messageView a, .messageView a:visited {
+	color:green;
+	text-decoration:none;
+}
+
+.messageView a:hover {
+	color:green;
+	text-decoration:underline;
+}
+
+.messageView:hover {
+	background: rgb(245, 245, 245);
+}
+
+
+.messageView img {
+	height: 85%;
+	width: 85%;
+}
+
+.messageView .messageActions {
+	margin: 0px;
+	padding: 0px;
+	display: hidden;
+	color: grey;
+}
+
+.messageView .messageActions li {
+	display: inline;
+}
+
+.messageView .username {
+	font-weight:bold; 
+	color:black;
+}
+
+.messageView .username a {
+	color: black;
+	text-decoration: none;
+}
+
+.messageView .username a:hover {
+	color: green;
+}
+
+.messageView .messageActions a {
+	text-decoration:none;
+	color: rgb(228, 228, 228);
+}
+
+.messageView:hover .messageActions a {
+	color: grey;
+}
+
+.messageView:hover .messageActions a:hover {
+	text-decoration: underline;
+}
+
+.replyView {
+	text-align: right;
+}
+
+.userInfo
+{
+	text-align: center;
+	margin: 0px auto;
+	padding: 0px 15px;
+}
+
+.userStats h2
+{
+	margin-top: 20px;
+	font-size: 14px;
+}
